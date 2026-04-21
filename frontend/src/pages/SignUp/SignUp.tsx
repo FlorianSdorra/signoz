@@ -1,6 +1,6 @@
 import { useMemo, useState } from 'react';
 import { Button, Callout, Input } from '@signozhq/ui';
-import { Form, Input as AntdInput, Typography } from 'antd';
+import { Form, Typography } from 'antd';
 import logEvent from 'api/common/logEvent';
 import signUpApi from 'api/v1/register/post';
 import passwordAuthNContext from 'api/v2/sessions/email_password/post';
@@ -158,7 +158,6 @@ function SignUp(): JSX.Element {
 										autoFocus
 										required
 										id="signupEmail"
-										className="signup-form-input"
 									/>
 								</FormContainer.Item>
 							</div>
@@ -170,12 +169,11 @@ function SignUp(): JSX.Element {
 									validateTrigger="onBlur"
 									rules={[{ required: true, message: 'Please enter password!' }]}
 								>
-									<AntdInput.Password
+									<Input.Password
 										required
 										id="currentPassword"
 										placeholder="Enter new password"
 										disabled={loading}
-										className="signup-antd-input"
 										onBlur={handlePasswordBlur}
 									/>
 								</FormContainer.Item>
@@ -188,12 +186,11 @@ function SignUp(): JSX.Element {
 									validateTrigger="onBlur"
 									rules={[{ required: true, message: 'Please enter confirm password!' }]}
 								>
-									<AntdInput.Password
+									<Input.Password
 										required
 										id="confirmPassword"
 										placeholder="Confirm your new password"
 										disabled={loading}
-										className="signup-antd-input"
 										onBlur={handleConfirmPasswordBlur}
 									/>
 								</FormContainer.Item>
@@ -201,13 +198,10 @@ function SignUp(): JSX.Element {
 						</div>
 					</div>
 
-					<Callout
-						type="info"
-						size="small"
-						showIcon
-						className="signup-info-callout"
-						title="This will create an admin account. If you are not an admin, please ask your admin for an invite link"
-					/>
+					<Callout type="info" size="small" showIcon className="signup-info-callout">
+						This will create an admin account. If you are not an admin, please ask
+						your admin for an invite link
+					</Callout>
 
 					{confirmPasswordError && (
 						<Callout
@@ -216,8 +210,9 @@ function SignUp(): JSX.Element {
 							showIcon
 							icon={<CircleAlert size={12} />}
 							className="signup-error-callout"
-							title="Passwords don't match. Please try again."
-						/>
+						>
+							Passwords don&apos;t match. Please try again.
+						</Callout>
 					)}
 
 					{formError && !confirmPasswordError && <AuthError error={formError} />}
